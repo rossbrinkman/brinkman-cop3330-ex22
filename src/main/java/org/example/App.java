@@ -13,7 +13,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        DecimalFormat f = new DecimalFormat("#0.##");
+        DecimalFormat f = new DecimalFormat("#0.###");
         Scanner scanner = new Scanner(System.in);
         float[] numbers = new float[3];
 
