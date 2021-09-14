@@ -1,7 +1,6 @@
 package org.example;
 import java.text.DecimalFormat;
 import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /*
