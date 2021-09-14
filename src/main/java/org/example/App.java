@@ -1,5 +1,7 @@
 package org.example;
 import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /*
@@ -11,47 +13,29 @@ public class App
 {
     public static void main( String[] args )
     {
-        DecimalFormat f = new DecimalFormat("#0.00####");
+        DecimalFormat f = new DecimalFormat("#0.##");
         Scanner scanner = new Scanner(System.in);
-        int maleOrFemale;
-        float ouncesAlcohol, weight, hoursSinceLastDrink, alcoholDistributionRatio, bloodAlcoholContent;
-        String currentInput;
+        float[] numbers = new float[3];
 
-        System.out.println( "Enter a 1 if you are male or a 2 if you are female: " );
-        currentInput = scanner.nextLine();
-        try{
-            maleOrFemale = Integer.parseInt(currentInput);}
-        catch (NumberFormatException nfe){
-            System.out.println( "Input must be numeric" );
-            return;
+        System.out.println( "Enter the first number: " );
+        numbers[0] = scanner.nextFloat();
+
+        System.out.println( "Enter the second number: " );
+        numbers[1] = scanner.nextFloat();
+
+        System.out.println( "Enter the third number: " );
+        numbers[2] = scanner.nextFloat();
+
+        Arrays.sort(numbers);
+        float biggest = numbers[0];
+        for (int i = 1; i < numbers.length; i++) {
+            if( numbers[i] == numbers[i-1])
+                System.exit(0);
+            if(numbers[i] > biggest)
+                biggest = numbers[i];
         }
 
-        if(maleOrFemale == 1)
-            alcoholDistributionRatio = 0.73f;
-        else if (maleOrFemale == 2)
-            alcoholDistributionRatio = 0.66f;
-        else
-        {
-            System.out.println( "Invalid Input" );
-            return;
-        }
-
-        System.out.println( "How many ounces of alcohol did you have? " );
-        ouncesAlcohol = scanner.nextFloat();
-
-        System.out.println( "What is your weight in pounds? " );
-        weight = scanner.nextFloat();
-
-        System.out.println( "How many hours has it been since your last drink? " );
-        hoursSinceLastDrink = scanner.nextFloat();
-
-        bloodAlcoholContent = (ouncesAlcohol * 5.14f / weight * alcoholDistributionRatio) - .015f * hoursSinceLastDrink;
-
-        System.out.println( "Your BAC is " + f.format(bloodAlcoholContent));
-
-        String endString = bloodAlcoholContent >= .08f ? "It is not legal for you to drive" : "It is legal for you to drive";
-
-        System.out.println(endString);
+        System.out.println( "The largest number is " + f.format(biggest) + ".");
 
         scanner.close();
     }
